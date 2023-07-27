@@ -1,4 +1,5 @@
 # Logs
+install.sh
 logs
 *.log
 npm-debug.log*
