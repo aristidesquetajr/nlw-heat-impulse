@@ -8,29 +8,35 @@ import { api } from "../../services/api";
 
 export const SendMessageForm = () => {
   const { user, signOut } = useContext(AuthContext);
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("");
 
   async function handleSendMessage(event: FormEvent) {
-    event.preventDefault()
+    event.preventDefault();
 
-    if(!message.trim()) {
-      return
+    if (!message.trim()) {
+      return;
     }
 
-    await api.post('messages', { message });
+    await api.post("messages", { message });
 
-    setMessage('')
+    setMessage("");
   }
 
   return (
-    <div className={styles.sendMessageFormWrapper}>    
-      <button className={styles.signOutButton} onClick={signOut}>
-        <VscSignOut  size="32" />
+    <div className={styles.sendMessageFormWrapper}>
+      <button
+        className={styles.signOutButton}
+        onClick={signOut}
+      >
+        <VscSignOut size="32" />
       </button>
 
       <header className={styles.userInformation}>
         <div className={styles.userImage}>
-          <img src={user?.avatar_url} alt={user?.name} />
+          <img
+            src={user?.avatar_url}
+            alt={user?.name}
+          />
         </div>
         <strong className={styles.userName}>{user?.name}</strong>
         <span className={styles.userGithub}>
@@ -44,12 +50,12 @@ export const SendMessageForm = () => {
         onSubmit={handleSendMessage}
       >
         <label htmlFor="message">Message</label>
-        <textarea 
-          name="message" 
-          id="message" 
+        <textarea
+          name="message"
+          id="message"
           placeholder="Qual sua expectativa para o evento?"
           value={message}
-          onChange={({target}) => setMessage(target.value)}
+          onChange={({ target }) => setMessage(target.value)}
         />
 
         <button type="submit">Enviar mensagem</button>
